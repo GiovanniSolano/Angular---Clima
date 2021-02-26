@@ -5,7 +5,7 @@
         </div>
         <div class="col-lg-8 text-center">
             <form [formGroup]="formularioClima" autocomplete="off" (ngSubmit)="obtenerClima()">
-                <input type="text" [class.is-invalid]="ciudadValida" formControlName="ciudad" class="form-control form-control-lg size" placeholder="Nombre de la ciudad">
+                <input type="text" (keyup)="cambiarFlag(input.value)" #input [class.is-invalid]="ciudadValida" formControlName="ciudad" class="form-control form-control-lg size" placeholder="Nombre de la ciudad">
                 <label class="text-danger form-text" *ngIf="ciudadValida">Ingresa la ciudad</label>
 
                 <div class="form-check form-check-inline mt-3">
@@ -27,7 +27,7 @@
 
                 <div class="spinner-border text-primary" role="status"> </div>
             </div>
-            <div class="card mt-3" *ngIf="mostrarCard && formularioClima.valid">
+            <div class="card mt-3" *ngIf="mostrarCardDB">
                 <div class="card-body">
                     <p><b>Temperatura: </b>{{clima.main.temp}} {{gradosLetras}} </p>
                     <p><b>Humedad: </b>{{clima.main.humidity}}</p>

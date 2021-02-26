@@ -18,7 +18,6 @@ export class DashboardComponent implements OnInit {
 
   urlImagen = 'https://www.revistaenfoque.cl/wp-content/uploads/2019/06/clima-icono.png';
   clima: Clima;
-  ciudad = '';
   loading = false;
   mostrarCard = false;
   gradosLetras: string;
@@ -39,6 +38,7 @@ export class DashboardComponent implements OnInit {
 
   obtenerClima() {
 
+    
     const datosClima = {
       ciudad: this.formularioClima.value.ciudad,
       grados: this.formularioClima.value.grados
@@ -105,6 +105,19 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  cambiarFlag(valorString) {
+
+    if(valorString === '') {
+      this.mostrarCard = false;
+    }
+    
+
+  }
+
+
+  get mostrarCardDB() {
+    return this.formularioClima.get('ciudad').valid && this.mostrarCard;
+  }
 
   get GradosValidos() {
 
