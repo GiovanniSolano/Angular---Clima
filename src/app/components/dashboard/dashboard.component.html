@@ -1,0 +1,39 @@
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <img [src]="urlImagen" class="img-responsive" alt="img_clima">
+        </div>
+        <div class="col-lg-8 text-center">
+            <form [formGroup]="formularioClima" autocomplete="off" (ngSubmit)="obtenerClima()">
+                <input type="text" [class.is-invalid]="ciudadValida" formControlName="ciudad" class="form-control form-control-lg size" placeholder="Nombre de la ciudad">
+                <label class="text-danger form-text" *ngIf="ciudadValida">Ingresa la ciudad</label>
+
+                <div class="form-check form-check-inline mt-3">
+                    <input [class.is-invalid]="GradosValidos" class="form-check-input" value="metric" formControlName="grados" type="radio" id="inlineCheckbox1">
+                    <label class="form-check-label" for="inlineCheckbox1">Celsius</label>
+                </div>
+                <div class="form-check form-check-inline ml-3">
+                    <input [class.is-invalid]="GradosValidos" class="form-check-input" value="imperial" formControlName="grados" type="radio" id="inlineCheckbox2">
+                    <label class="form-check-label" for="inlineCheckbox2">Fahrenheit</label>
+                </div>
+                <div class="form-check form-check-inline ml-3">
+                    <input [class.is-invalid]="GradosValidos" class="form-check-input" value="standard" formControlName="grados" type="radio" id="inlineCheckbox3">
+                    <label class="form-check-label" for="inlineCheckbox3">Kelvin</label>
+                </div>
+                <label class="form-text text-danger" *ngIf="GradosValidos">Selecciona el tipo de grados</label>
+                <button type="submit" [disabled]="formularioClima.invalid" class="btn btn-primary btn-lg btn-block mt-4 size">OBTENER CLIMA</button>
+            </form>
+            <div class="text-center mt-3" *ngIf="loading">
+
+                <div class="spinner-border text-primary" role="status"> </div>
+            </div>
+            <div class="card mt-3" *ngIf="mostrarCard && formularioClima.valid">
+                <div class="card-body">
+                    <p><b>Temperatura: </b>{{clima.main.temp}} {{gradosLetras}} </p>
+                    <p><b>Humedad: </b>{{clima.main.humidity}}</p>
+                    <p><b>Clima: </b>{{clima.weather[0].main}} - {{clima.weather[0].description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
